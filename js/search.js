@@ -98,35 +98,43 @@ function getLatestDataSummary() {
 }
 
 function getTop3Countries(){
-  let max=0;
   regions=latestDataSummary['regions'];
+function extactTop(){
+  let max=0;
     for (key in  regions) {
       if(regions[key]['total_cases']>max ){
         max=regions[key]['total_cases'];
-        top1=key;
+        top=key;
       }
     }
-    var {[top1]:tempVar, ...regions}= regions;
-    top1Data=tempVar;
-    max=0;
-    for (key in  regions) {
-      if(regions[key]['total_cases']>max ){
-        max=regions[key]['total_cases'];
-        top2=key;
-      }
-    }
-    var {[top2]:tempVar, ...regions}= regions;
-    top2Data=tempVar;
-    max=0;
-    for (key in  regions) {
-      if(regions[key]['total_cases']>max ){
-        max=regions[key]['total_cases'];
-        top3=key;
-      }
-    }
-    var {[top3]:tempVar, ...regions}= regions;
-    top3Data=tempVar;
-    regions=latestDataSummary['regions'];
+    var {[top]:tempVar, ...restCountries}= regions;
+    regions=restCountries;
+    return tempVar;
+
+}
+top1Data=extactTop();
+top2Data=extactTop();
+top3Data=extactTop();
+
+    // max=0;
+    // for (key in  regions) {
+    //   if(regions[key]['total_cases']>max ){
+    //     max=regions[key]['total_cases'];
+    //     top2=key;
+    //   }
+    // }
+    // var {[top2]:tempVar, ...regions}= regions;
+    // top2Data=tempVar;
+    // max=0;
+    // for (key in  regions) {
+    //   if(regions[key]['total_cases']>max ){
+    //     max=regions[key]['total_cases'];
+    //     top3=key;
+    //   }
+    // }
+    // var {[top3]:tempVar, ...regions}= regions;
+    // top3Data=tempVar;
+    // regions=latestDataSummary['regions'];
   }
 
   function getTop3Ratios(){
