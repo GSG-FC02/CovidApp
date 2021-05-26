@@ -112,7 +112,8 @@ function getTop3Countries() {
 
     }
     var { [top]: tempVar, ...restCountries } = regions;
-    // using ...regions  instead of ...restCountries will make regions locally declared due to var statement and it will became undefined
+    // using ...regions  instead of ...restCountries will make regions locally declared due to var statement and it will became undefined in line 105     for (key in regions) {
+
     regions = restCountries;
     return tempVar;
   }
