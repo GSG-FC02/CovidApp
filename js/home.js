@@ -15,9 +15,9 @@ let wantToReload=false;
 
 
 window.onload = () => {
-    getRegions();
     getUserCountryCodeFromIp()
     .then(getLatestDataSummary)
+    .then(getRegions)
     .then(getUserDataSummary)
     .then(showData)
     .catch(()=>{wantToReload=confirm('It seems that your connection is unstable. Do you want to reload the page?');if(wantToReload) location.reload()})
@@ -38,12 +38,9 @@ window.onload = () => {
     .then(res2=>latestDataSummary=res2.data)
   }
   function getRegions(){
-    let url='https://api.quarantine.country/api/v1/regions'
-    fetch(url)
-    .then(res=>res.json())
-    .then(res2=>res2['data'].forEach(element => {
-      countrycodes[element.iso3166a3]=element.key;
-    }))
+  for (key in latestDataSummary.regions){
+    countrycodes[latestDataSummary.regions[key].iso3166a3]=key;
+  }
   }
   
   function getUserDataSummary(){
